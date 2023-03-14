@@ -1,7 +1,7 @@
 /* eslint-env browser */
 
 import * as API from './interface.js'
-
+import axios from 'axios'
 /**
  * Gets cluster version
  *
@@ -71,12 +71,19 @@ export const add = async (cluster, file, options = {}) => {
   const params = encodeAddParams(options)
 
   try {
-    const result = await request(cluster, 'add', {
-      params,
-      method: 'POST',
-      body,
-      signal: options.signal
-    })
+//     const result = await request(cluster, 'add', {
+//       params,
+//       method: 'POST',
+//       body,
+//       signal: options.signal
+//     })
+    const result = await axios.post(`${cluster}add`, body, {
+    params,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: options.onUploadProgress,
+    });
     const data = params['stream-channels'] ? result : result[0]
     return { ...data, cid: data.cid }
   } catch (err) {
