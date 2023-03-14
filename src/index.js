@@ -87,6 +87,8 @@ export const add = async (cluster, file, options = {}) => {
     });
     console.log('result ========', result);
     const fileResult = result.data
+     console.log('fileResult ========', fileResult);
+
     const data = params['stream-channels'] ? fileResult : fileResult[0]
     return { ...data, cid: data.cid }
   } catch (err) {
