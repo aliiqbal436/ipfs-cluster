@@ -77,10 +77,10 @@ export const add = async (cluster, file, options = {}) => {
 //       body,
 //       signal: options.signal
 //     })
-    const result = await axios.post(`${cluster}add`, body, {
+    const result = await axios.post(`${cluster.url}add`, body, {
     params,
       headers: {
-        "Content-Type": "multipart/form-data",
+        ...cluster.headers
       },
       onUploadProgress: options.onUploadProgress,
     });
