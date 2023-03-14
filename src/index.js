@@ -77,6 +77,7 @@ export const add = async (cluster, file, options = {}) => {
 //       body,
 //       signal: options.signal
 //     })
+    console.log('options ====', options);
     const result = await axios.post(`${cluster.url}add`, body, {
     params,
       headers: {
