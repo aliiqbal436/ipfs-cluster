@@ -71,13 +71,6 @@ export const add = async (cluster, file, options = {}) => {
   const params = encodeAddParams(options)
 
   try {
-//     const result = await request(cluster, 'add', {
-//       params,
-//       method: 'POST',
-//       body,
-//       signal: options.signal
-//     })
-    console.log('options ====', options);
     const result = await axios.post(`${cluster.url}add`, body, {
     params,
       headers: {
@@ -85,10 +78,7 @@ export const add = async (cluster, file, options = {}) => {
       },
       onUploadProgress: options.onUploadProgress,
     });
-    console.log('result ========', result);
     const fileResult = result.data
-     console.log('fileResult ========', fileResult);
-
     const data = params['stream-channels'] ? fileResult : fileResult[0]
     return { ...data, cid: data.cid }
   } catch (err) {
